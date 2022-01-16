@@ -1,3 +1,4 @@
+import '../styles/Header.css'
 import { SearchIcon, ShoppingCartIcon } from '@heroicons/react/solid'
 import { signOut } from 'firebase/auth';
 import { Link } from 'react-router-dom'
@@ -15,33 +16,35 @@ function Header() {
     }
 
     return (
-        <div className="h-16 w-full flex items-center sticky bg-gray-900 top-0 z-10 space-x-3 justify-between">
+        <div className="header">
             <Link to='/'>
-                <img src='http://pngimg.com/uploads/amazon/amazon_PNG11.png' className='h-12 w-fit m-0 ml-4 mt-4'/>
+                <img src='http://pngimg.com/uploads/amazon/amazon_PNG11.png' className='header__logo'/>
             </Link>
-            <div className='flex flex-1 items-center rounded-md overflow-hidden'>
-                <input type='text' className='w-full h-8'/>
-                <SearchIcon className='p-2 h-8 w-fit bg-primary'/>
+            <div className='header__search'>
+                <input type='text' className='header__searchInput'/>
+                <SearchIcon className='header__searchIcon'/>
             </div>
-            <div className='flex justify-evenly items-center'>
+            <div className='header__nav'>
                 <Link to={!user && '/login'}>
-                    <div className='header_option' onClick={handleAuthentication}>
-                        <span className="header_option_lineOne">{user ? `Hello ${user.email}` : 'Hello guest'}</span>
-                        <span className="header_option_lineTwo">{user ? 'Sign Out' : 'Sign In'}</span>
+                    <div className='header__option' onClick={handleAuthentication}>
+                        <span className="header__optionLineOne">{user ? `Hello ${user.email}` : 'Hello guest'}</span>
+                        <span className="header__optionLineTwo">{user ? 'Sign Out' : 'Sign In'}</span>
                     </div>
                 </Link>
-                <div className='header_option'>
-                    <span className="header_option_lineOne">Returns &</span>
-                    <span className="header_option_lineTwo">Orders</span>
-                </div>
-                <div className='header_option'>
-                    <span className="header_option_lineOne">Your</span>
-                    <span className="header_option_lineTwo">Prime</span>
+                <Link to='/orders'>
+                    <div className='header__option'>
+                        <span className="header__optionLineOne">Returns &</span>
+                        <span className="header__optionLineTwo">Orders</span>
+                    </div>
+                </Link>
+                <div className='header__option'>
+                    <span className="header__optionLineOne">Your</span>
+                    <span className="header__optionLineTwo">Prime</span>
                 </div>
                 <Link to='/checkout'>
-                    <div className='header_option flex flex-row items-center space-x-2 mr-6'>
+                    <div className='header__optionBasket'>
                         <ShoppingCartIcon className='h-8 w-fit'/>
-                        <span className='header_option_lineTwo'>{basket?.length}</span>
+                        <span className='header__optionLineTwo header__basketCount'>{basket?.length}</span>
                     </div>
                 </Link>
             </div>
